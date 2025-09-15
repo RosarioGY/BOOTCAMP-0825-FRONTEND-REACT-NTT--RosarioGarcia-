@@ -1,69 +1,70 @@
-# React + TypeScript + Vite
+# Proyecto Integrador: E-commerce React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Descripción
+Aplicación web de e-commerce desarrollada con React, TypeScript y Vite. Permite a los usuarios explorar productos, filtrarlos, agregarlos al carrito y realizar compras, con autenticación y rutas protegidas.
 
-Currently, two official plugins are available:
+## Características principales
+- **Diseño responsive**: Funciona en desktop y móvil, usando Flexbox y Grid.
+- **Arquitectura escalable**: Estructura modular por dominios y componentes reutilizables.
+- **React + TypeScript + Vite**: Tipado estricto y desarrollo moderno.
+- **Hooks personalizados**: Manejo de estado y lógica reutilizable con useState, useEffect y custom hooks.
+- **Context API**: Compartición de estado global para autenticación y carrito.
+- **Patrón mappers**: Transformación de datos de la API (snake_case a camelCase).
+- **Rutas protegidas**: Uso de react-router-dom y HOC para proteger rutas tras login.
+- **Componentes propios**: Alertas, modales, inputs, sin librerías de UI externas.
+- **Validación**: Validación manual y posibilidad de integrar react-hook-form o formik.
+- **Sin Redux**: Prohibido el uso de Redux.
+- **Pruebas unitarias**: Con Vitest y Testing Library, cobertura >90%.
+- **Commits semánticos**: Uso de feat, fix, chore, etc.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Scripts disponibles
+- `npm run dev` — Ejecuta el servidor de desarrollo
+- `npm run build` — Compila la aplicación para producción
+- `npm run preview` — Previsualiza la build de producción
+- `npm run test` — Ejecuta los tests unitarios
+- `npm run test:coverage` — Ejecuta los tests y muestra el coverage
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Estructura de carpetas
+```
+REACT PROYECT NTTDATA/
+  src/
+    app/           # Configuración de rutas y providers
+    modules/       # Módulos de dominio (auth, home, cart)
+    shared/        # Componentes, hooks y utilidades reutilizables
+    assets/        # Imágenes, estilos y datos estáticos
+    test/          # Configuración de pruebas
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Tecnologías usadas
+- React 19
+- TypeScript
+- Vite
+- react-router-dom
+- Context API
+- Vitest + Testing Library
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Instalación y uso
+1. Clona el repositorio
+2. Instala dependencias:
+   ```
+   npm install
+   ```
+3. Ejecuta el servidor de desarrollo:
+   ```
+   npm run dev
+   ```
+4. Abre [http://localhost:5173](http://localhost:5173) en tu navegador
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Notas de evaluación
+- No se usan librerías de UI ni utilitarios externos (solo fetch API, sin axios)
+- No se usa Redux
+- El código es 100% TypeScript, sin `any`
+- El diseño es propio y puede ser personalizado
+- Cada componente, hook, utilidad y página tiene su test unitario
+
+## Autora
+Rosario Garcia
+
+---
+
+> Proyecto realizado para el Bootcamp Frontend NTT DATA 2025.
