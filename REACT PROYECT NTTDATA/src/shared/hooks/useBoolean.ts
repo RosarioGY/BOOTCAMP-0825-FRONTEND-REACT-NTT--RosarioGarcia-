@@ -1,0 +1,1 @@
+// useBoolean.ts - Boolean custom hook
