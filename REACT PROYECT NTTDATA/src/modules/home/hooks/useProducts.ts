@@ -47,9 +47,9 @@ export function useFilteredProducts(
     if (normalized.length < 3) return byCategory; // Home: búsqueda empieza con 3+ chars
 
     return byCategory.filter(p =>
-      p.title.toLowerCase().includes(normalized) ||
-      p.description.toLowerCase().includes(normalized) ||
-      p.brand.toLowerCase().includes(normalized)
+      (p.title?.toLowerCase?.().includes(normalized) ?? false) ||
+      (p.description?.toLowerCase?.().includes(normalized) ?? false) ||
+      (p.brand?.toLowerCase?.().includes(normalized) ?? false)
     );
-  }, [products, term, category]);
+  }, [products, category, normalized]);
 }
