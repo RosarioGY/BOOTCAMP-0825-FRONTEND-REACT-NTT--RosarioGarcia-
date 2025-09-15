@@ -1,7 +1,7 @@
 // useProducts.ts - Products custom hook
 import { useEffect, useMemo, useState } from 'react';
-import type { Product } from '../types/products.types';
-import { getAllProducts, getAllCategories } from '../services/products.service';
+import type { Product } from '@/modules/home/types/products.types';
+import { getAllProducts, getAllCategories } from '@/modules/home/services/products.service';
 
 export function useProducts() {
   const [loading, setLoading] = useState(true);

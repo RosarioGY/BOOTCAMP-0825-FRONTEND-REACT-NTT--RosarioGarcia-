@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import DistrictSelect from './DistrictSelect';
-import { isLetters, isNonEmpty, isPhone } from '../../../shared/utils/validation';
+import DistrictSelect from '@/modules/cart/components/DistrictSelect';
+import { isLetters, isNonEmpty, isPhone } from '@/shared/utils/validation';
 
 export type CheckoutData = {
   nombres: string;

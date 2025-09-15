@@ -13,7 +13,7 @@ export function useDistricts() {
     (async () => {
       try {
         // import dinámico soportado por Vite/TS
-        const mod: DistrictsFile = (await import('../../../assets/data/districts.json')).default as DistrictsFile;
+        const mod: DistrictsFile = (await import('@/shared/utils/districts.json')).default as DistrictsFile;
         if (mounted) setDistricts(mod.districts ?? []);
       } catch {
         if (mounted) setErr('No se pudieron cargar los distritos');

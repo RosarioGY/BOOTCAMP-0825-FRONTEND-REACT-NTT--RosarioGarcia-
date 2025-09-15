@@ -1,7 +1,7 @@
 // useRegister.ts - Hook for user registration
 import { useState } from 'react';
-import { registerService } from '../services/auth.service';
-import type { RegisterCredentials, RawRegisterResponse } from '../types/auth.types';
+import { registerService } from '@/modules/auth/services/auth.service';
+import type { RegisterCredentials, RawRegisterResponse } from '@/modules/auth/types/auth.types';
 
 interface UseRegisterReturn {
   register: (credentials: RegisterCredentials) => Promise<RawRegisterResponse>;

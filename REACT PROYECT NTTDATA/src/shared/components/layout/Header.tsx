@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../../modules/auth/hooks/useAuth';
-import { useCart } from '../../../modules/cart/hooks/useCart';
-import { ROUTES } from '../../constants/routes';
+import { useAuth } from '@/modules/auth/hooks/useAuth';
+import { useCart } from '@/modules/cart/hooks/useCart';
+import { ROUTES } from '@/shared/constants/routes';
 
 export default function Header() {
   const { user, logout } = useAuth();

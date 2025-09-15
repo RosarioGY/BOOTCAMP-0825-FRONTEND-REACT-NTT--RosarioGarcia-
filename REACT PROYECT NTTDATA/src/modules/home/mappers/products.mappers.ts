@@ -1,5 +1,5 @@
 // products.mappers.ts - Products mappers
-import type { RawProduct, Product } from '../types/products.types';
+import type { RawProduct, Product } from '@/modules/home/types/products.types';
 
 export const mapProduct = (raw: RawProduct): Product => ({
   id: raw.id,

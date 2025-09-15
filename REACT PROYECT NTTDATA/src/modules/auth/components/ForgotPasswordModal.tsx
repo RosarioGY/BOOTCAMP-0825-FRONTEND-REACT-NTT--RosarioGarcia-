@@ -1,6 +1,6 @@
 // ForgotPasswordModal.tsx - Forgot password modal component
 import { useState } from 'react';
-import { Modal } from '../../../shared/components/ui/Modal';
+import { Modal } from '@/shared/components/ui/Modal';
 
 interface ForgotPasswordModalProps {
   isOpen: boolean;

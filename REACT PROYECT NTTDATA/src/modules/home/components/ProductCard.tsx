@@ -1,5 +1,5 @@
-import type { Product } from '../types/products.types';
-import { Button } from '../../../shared/components/ui/Button';
+import type { Product } from '@/modules/home/types/products.types';
+import { Button } from '@/shared/components/ui/Button';
 
 type Props = {
   product: Product;

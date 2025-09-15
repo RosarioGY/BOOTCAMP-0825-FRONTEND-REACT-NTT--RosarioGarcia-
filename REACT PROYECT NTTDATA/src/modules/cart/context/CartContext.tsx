@@ -1,6 +1,6 @@
 import { useMemo, useReducer, useCallback } from 'react';
-import { cartReducer, initialCart } from '../reducers/cart.reducer';
-import { CartContext, type CartCtx } from './CartContext';
+import { cartReducer, initialCart } from '@/modules/cart/reducers/cart.reducer';
+import { CartContext, type CartCtx } from '@/modules/cart/context/CartContext';
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(cartReducer, initialCart);

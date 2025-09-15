@@ -1,6 +1,6 @@
 // CartPage.tsx - Cart page component
-import { useAuth } from '../../auth/hooks/useAuth';
-import { Layout } from '../../../shared/components/layout/Layout';
+import { useAuth } from '@/modules/auth/hooks/useAuth';
+import { Layout } from '@/shared/components/layout/Layout';
 
 export function CartPage() {
   const { user } = useAuth();

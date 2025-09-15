@@ -1,7 +1,7 @@
 // auth.service.ts - Authentication service
-import { loginUser, getUserProfile, refreshAccessToken, isTokenExpired, logoutUser, registerUser } from '../../../api/Auth';
-import type { AuthCredentials, User, RegisterCredentials, RawRegisterResponse } from '../types/auth.types';
-import { mapAuthResponse, mapUserProfileResponse } from '../mappers/auth.mappers';
+import { loginUser, getUserProfile, refreshAccessToken, isTokenExpired, logoutUser, registerUser } from '@/api/Auth';
+import type { AuthCredentials, User, RegisterCredentials, RawRegisterResponse } from '@/modules/auth/types/auth.types';
+import { mapAuthResponse, mapUserProfileResponse } from '@/modules/auth/mappers/auth.mappers';
 
 export async function loginService(credentials: AuthCredentials): Promise<User> {
   const response = await loginUser({

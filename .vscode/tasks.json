@@ -8,7 +8,10 @@
 			"args": [],
 			"isBackground": true,
 			"problemMatcher": [],
-			"group": "build"
+			"group": "build",
+			"options": {
+				"cwd": "${workspaceFolder}/REACT PROYECT NTTDATA"
+			}
 		}
 	]
 }

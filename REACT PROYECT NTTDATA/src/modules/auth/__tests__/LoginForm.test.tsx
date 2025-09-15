@@ -2,11 +2,11 @@
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { LoginForm } from '../components/LoginForm';
-import { AuthProvider } from '../context/AuthProvider';
+import { LoginForm } from '@/modules/auth/components/LoginForm';
+import { AuthProvider } from '@/modules/auth/context/AuthProvider';
 
 // Mock del servicio de auth
-vi.mock('../services/auth.service', () => ({
+vi.mock('@/modules/auth/services/auth.service', () => ({
   loginService: vi.fn(),
 }));
 

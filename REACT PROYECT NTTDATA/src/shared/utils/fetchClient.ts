@@ -1,6 +1,6 @@
 // fetchClient.ts - wrapper de fetch con manejo de errores
 import { HttpError } from './http';
-import { API } from '../constants/api';
+import { API } from '@/shared/constants/api';
 
 export async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API.baseUrl}${path}`, {

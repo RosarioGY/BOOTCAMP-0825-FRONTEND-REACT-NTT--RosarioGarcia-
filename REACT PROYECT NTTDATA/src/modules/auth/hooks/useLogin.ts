@@ -1,10 +1,10 @@
 // useLogin.ts - Login custom hook
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './useAuth';
-import { checkTokenExpiration, refreshTokenService } from '../services/auth.service';
-import { ROUTES } from '../../../shared/constants/routes';
-import type { AuthCredentials } from '../types/auth.types';
+import { useAuth } from '@/modules/auth/hooks/useAuth';
+import { checkTokenExpiration, refreshTokenService } from '@/modules/auth/services/auth.service';
+import { ROUTES } from '@/shared/constants/routes';
+import type { AuthCredentials } from '@/modules/auth/types/auth.types';
 
 export function useLogin() {
   const [isLoading, setIsLoading] = useState(false);

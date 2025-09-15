@@ -1,4 +1,4 @@
-import type { CartItem } from '../types/cart.types';
+import type { CartItem } from '@/modules/cart/types/cart.types';
 
 export type CartAction =
   | { type: 'ADD_ONE'; payload: Omit<CartItem, 'qty'> }

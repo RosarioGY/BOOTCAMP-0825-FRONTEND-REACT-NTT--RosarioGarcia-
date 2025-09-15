@@ -1,6 +1,6 @@
 // AuthContext.ts - Authentication context definition
 import { createContext } from 'react';
-import type { User, AuthCredentials } from '../types/auth.types';
+import type { User, AuthCredentials } from '@/modules/auth/types/auth.types';
 
 export type AuthContextValue = {
   user: User | null;

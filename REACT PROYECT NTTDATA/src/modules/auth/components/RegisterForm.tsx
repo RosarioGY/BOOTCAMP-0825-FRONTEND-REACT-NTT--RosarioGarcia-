@@ -1,11 +1,11 @@
 // RegisterForm.tsx - Register form component
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useRegister } from '../hooks/useRegister';
-import { ROUTES } from '../../../shared/constants/routes';
-import { Modal } from '../../../shared/components/ui/Modal';
-import { Alert } from '../../../shared/components/ui/Alert';
-import type { RegisterCredentials } from '../types/auth.types';
+import { useRegister } from '@/modules/auth/hooks/useRegister';
+import { ROUTES } from '@/shared/constants/routes';
+import { Modal } from '@/shared/components/ui/Modal';
+import { Alert } from '@/shared/components/ui/Alert';
+import type { RegisterCredentials } from '@/modules/auth/types/auth.types';
 
 export function RegisterForm() {
   const [formData, setFormData] = useState<RegisterCredentials>({

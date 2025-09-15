@@ -1,9 +1,9 @@
 // AuthProvider.tsx - Authentication provider component
 import { useMemo, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import type { User, AuthCredentials } from '../types/auth.types';
-import { AuthContext, type AuthContextValue } from './AuthContext';
-import { loginService } from '../services/auth.service';
+import type { User, AuthCredentials } from '@/modules/auth/types/auth.types';
+import { AuthContext, type AuthContextValue } from '@/modules/auth/context/AuthContext';
+import { loginService } from '@/modules/auth/services/auth.service';
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);

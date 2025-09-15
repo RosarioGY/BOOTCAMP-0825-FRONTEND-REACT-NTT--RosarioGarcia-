@@ -1,8 +1,8 @@
 // products.service.ts - Products service
-import { apiFetch } from '../../../shared/utils/fetchClient';
-import { API } from '../../../shared/constants/api';
-import type { RawProduct, Product } from '../types/products.types';
-import { mapProduct } from '../mappers/products.mappers';
+import { apiFetch } from '@/shared/utils/fetchClient';
+import { API } from '@/shared/constants/api';
+import type { RawProduct, Product } from '@/modules/home/types/products.types';
+import { mapProduct } from '@/modules/home/mappers/products.mappers';
 
 type RawList = { products: RawProduct[] };
 

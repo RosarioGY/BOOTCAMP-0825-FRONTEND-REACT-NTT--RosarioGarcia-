@@ -1,5 +1,5 @@
-import type { CartItem } from '../types/cart.types';
-import QuantityControl from './QuantityControl';
+import type { CartItem } from '@/modules/cart/types/cart.types';
+import QuantityControl from '@/modules/cart/components/QuantityControl';
 
 type Props = {
   items: CartItem[];

@@ -1,6 +1,6 @@
 // AppRouter.tsx - Main application router
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { appRoutes } from './routes';
+import { appRoutes } from '@/app/router/routes';
 import { ROUTES } from '@/shared/constants/routes';
 
 export default function AppRouter() {

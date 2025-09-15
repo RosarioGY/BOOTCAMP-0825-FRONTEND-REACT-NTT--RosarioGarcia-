@@ -180,37 +180,3 @@ export function logoutUser(): void {
   localStorage.removeItem('accessToken');
   localStorage.removeItem('refreshToken');
 }
-
-// Ejemplos de uso:
-/*
-// Login
-try {
-  const loginResult = await loginUser({
-    username: 'emilys',
-    password: 'emilyspass',
-    expiresInMins: 30
-  });
-  console.log('Login exitoso:', loginResult);
-} catch (error) {
-  console.error('Error en login:', error);
-}
-
-// Obtener perfil
-try {
-  const profile = await getUserProfile('your-access-token-here');
-  console.log('Perfil:', profile);
-} catch (error) {
-  console.error('Error al obtener perfil:', error);
-}
-
-// Refrescar token
-try {
-  const newTokens = await refreshAccessToken({
-    refreshToken: 'your-refresh-token-here',
-    expiresInMins: 30
-  });
-  console.log('Tokens renovados:', newTokens);
-} catch (error) {
-  console.error('Error al refrescar token:', error);
-}
-*/

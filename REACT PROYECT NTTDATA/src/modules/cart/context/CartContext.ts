@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { CartItem } from '../types/cart.types';
+import type { CartItem } from '@/modules/cart/types/cart.types';
 
 type AddOneResult = 'ok' | 'out_of_stock';
 

@@ -1,10 +1,10 @@
 // LoginForm.tsx - Login form component
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-import { ROUTES } from '../../../shared/constants/routes';
-import { Modal } from '../../../shared/components/ui/Modal';
-import { ForgotPasswordModal } from './ForgotPasswordModal';
+import { useAuth } from '@/modules/auth/hooks/useAuth';
+import { ROUTES } from '@/shared/constants/routes';
+import { Modal } from '@/shared/components/ui/Modal';
+import { ForgotPasswordModal } from '@/modules/auth/components/ForgotPasswordModal';
 
 export function LoginForm() {
   const [username, setUsername] = useState('emilys'); // Credenciales de prueba de DummyJSON

@@ -1,15 +1,15 @@
 // HomePage.tsx - Home page component
 import { useState } from 'react';
-import { useProducts, useFilteredProducts } from '../hooks/useProducts';
-import SearchBox from '../components/SearchBox';
-import CategoryFilter from '../components/CategoryFilter';
-import ProductCard from '../components/ProductCard';
-import Pagination from '../components/Pagination';
-import { usePagination } from '../hooks/usePagination';
-import { useCart } from '../../cart/hooks/useCart';
-import { Modal } from '../../../shared/components/ui/Modal';
-import { Alert } from '../../../shared/components/ui/Alert';
-import { Layout } from '../../../shared/components/layout/Layout';
+import { useProducts, useFilteredProducts } from '@/modules/home/hooks/useProducts';
+import SearchBox from '@/modules/home/components/SearchBox';
+import CategoryFilter from '@/modules/home/components/CategoryFilter';
+import ProductCard from '@/modules/home/components/ProductCard';
+import Pagination from '@/modules/home/components/Pagination';
+import { usePagination } from '@/modules/home/hooks/usePagination';
+import { useCart } from '@/modules/cart/hooks/useCart';
+import { Modal } from '@/shared/components/ui/Modal';
+import { Alert } from '@/shared/components/ui/Alert';
+import { Layout } from '@/shared/components/layout/Layout';
 
 export function HomePage() {
   const { loading, products, categories, error } = useProducts();

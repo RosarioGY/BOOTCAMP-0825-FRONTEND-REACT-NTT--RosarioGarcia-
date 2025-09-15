@@ -1,12 +1,12 @@
-import CartTable from '../components/CartTable';
-import { CartTotal } from '../components/CartTotal';
-import CheckoutForm, { type CheckoutData } from '../components/CheckoutForm';
-import { useCart } from '../hooks/useCart';
-import { Modal } from '../../../shared/components/ui/Modal';
-import { Alert } from '../../../shared/components/ui/Alert';
+import CartTable from '@/modules/cart/components/CartTable';
+import { CartTotal } from '@/modules/cart/components/CartTotal';
+import CheckoutForm, { type CheckoutData } from '@/modules/cart/components/CheckoutForm';
+import { useCart } from '@/modules/cart/hooks/useCart';
+import { Modal } from '@/shared/components/ui/Modal';
+import { Alert } from '@/shared/components/ui/Alert';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ROUTES } from '../../../shared/constants/routes';
+import { ROUTES } from '@/shared/constants/routes';
 
 export function SummaryPage() {
   const { items, totalPrice, inc, dec, remove, clear } = useCart();

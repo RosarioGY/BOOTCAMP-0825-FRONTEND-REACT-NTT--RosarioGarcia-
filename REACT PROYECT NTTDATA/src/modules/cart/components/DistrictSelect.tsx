@@ -1,4 +1,4 @@
-import { useDistricts } from '../hooks/useDistricts';
+import { useDistricts } from '@/modules/cart/hooks/useDistricts';
 
 type Props = { value: string; onChange: (v: string) => void; error?: string; };
 export default function DistrictSelect({ value, onChange, error }: Props) {

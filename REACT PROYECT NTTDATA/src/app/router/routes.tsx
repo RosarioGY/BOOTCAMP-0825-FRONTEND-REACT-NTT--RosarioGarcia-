@@ -1,11 +1,11 @@
 // routes.tsx - Route definitions
-import { ROUTES } from '../../shared/constants/routes';
-import { LoginPage } from '../../modules/auth/pages/LoginPage';
-import { RegisterPage } from '../../modules/auth/pages/RegisterPage';
-import { HomePage } from '../../modules/home/pages/HomePage';
-import { CartPage } from '../../modules/cart/pages/CartPage';
-import { SummaryPage } from '../../modules/cart/pages/SummaryPage';
-import { withAuthGuard } from './withAuthGuard';
+import { ROUTES } from '@/shared/constants/routes';
+import { LoginPage } from '@/modules/auth/pages/LoginPage';
+import { RegisterPage } from '@/modules/auth/pages/RegisterPage';
+import { HomePage } from '@/modules/home/pages/HomePage';
+import { CartPage } from '@/modules/cart/pages/CartPage';
+import { SummaryPage } from '@/modules/cart/pages/SummaryPage';
+import { withAuthGuard } from '@/app/router/withAuthGuard';
 
 const ProtectedHomePage = withAuthGuard(HomePage);
 const ProtectedCartPage = withAuthGuard(CartPage);

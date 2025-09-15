@@ -1,5 +1,5 @@
 // auth.mappers.ts - Authentication mappers
-import type { RawAuthResponse, RawUserProfile, User } from '../types/auth.types';
+import type { RawAuthResponse, RawUserProfile, User } from '@/modules/auth/types/auth.types';
 
 // Mapper para la respuesta de login
 export const mapAuthResponse = (raw: RawAuthResponse): User => ({
