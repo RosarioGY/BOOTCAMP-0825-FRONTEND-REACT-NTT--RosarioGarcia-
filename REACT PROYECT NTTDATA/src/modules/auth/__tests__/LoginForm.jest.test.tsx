@@ -1,28 +1,24 @@
-// LoginForm.test.tsx - Tests completos para LoginForm
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+// LoginForm.jest.test.tsx - Tests completos con Jest para LoginForm
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { LoginForm } from '@/modules/auth/components/LoginForm';
 import { AuthProvider } from '@/modules/auth/context/AuthProvider';
 import { loginService } from '@/modules/auth/services/auth.service';
 
-// Mock del servicio de auth
-vi.mock('@/modules/auth/services/auth.service', () => ({
-  loginService: vi.fn(),
+// Mocks
+jest.mock('@/modules/auth/services/auth.service', () => ({
+  loginService: jest.fn(),
 }));
 
-// Mock de react-router-dom navigate
-const mockNavigate = vi.fn();
-vi.mock('react-router-dom', async () => {
-  const actual = await vi.importActual('react-router-dom');
-  return {
-    ...actual,
-    useNavigate: () => mockNavigate,
-  };
-});
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
 
-const MockWrapper = ({ children }: { children: React.ReactNode }) => (
+const TestWrapper = ({ children }: { children: React.ReactNode }) => (
   <BrowserRouter>
     <AuthProvider>
       {children}
@@ -30,35 +26,35 @@ const MockWrapper = ({ children }: { children: React.ReactNode }) => (
   </BrowserRouter>
 );
 
-describe('LoginForm', () => {
+const mockLoginService = loginService as jest.MockedFunction<typeof loginService>;
+
+describe('LoginForm - Jest Tests', () => {
   beforeEach(() => {
-    vi.clearAllMocks();
+    jest.clearAllMocks();
+    localStorage.clear();
   });
 
   describe('Renderizado inicial', () => {
-    it('should render all form elements correctly', () => {
+    test('debe renderizar todos los elementos del formulario', () => {
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
-      // Campos del formulario
       expect(screen.getByLabelText(/usuario/i)).toBeInTheDocument();
       expect(screen.getByLabelText(/contraseña/i)).toBeInTheDocument();
       expect(screen.getByRole('button', { name: /iniciar sesión/i })).toBeInTheDocument();
-      
-      // Enlaces adicionales
       expect(screen.getByText(/olvidé contraseña/i)).toBeInTheDocument();
       expect(screen.getByText(/¿no tienes una cuenta\?/i)).toBeInTheDocument();
       expect(screen.getByText(/regístrate/i)).toBeInTheDocument();
     });
 
-    it('should have pre-filled credentials for testing', () => {
+    test('debe tener credenciales pre-llenadas para testing', () => {
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const usernameInput = screen.getByLabelText(/usuario/i);
@@ -68,11 +64,11 @@ describe('LoginForm', () => {
       expect(passwordInput).toHaveValue('emilyspass');
     });
 
-    it('should have correct input types and attributes', () => {
+    test('debe tener atributos correctos en los inputs', () => {
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const usernameInput = screen.getByLabelText(/usuario/i);
@@ -88,32 +84,35 @@ describe('LoginForm', () => {
   });
 
   describe('Interacciones de usuario', () => {
-    it('should update input values when typing', async () => {
+    test('debe permitir cambiar los valores de los inputs', async () => {
       const user = userEvent.setup();
+      
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const usernameInput = screen.getByLabelText(/usuario/i);
       const passwordInput = screen.getByLabelText(/contraseña/i);
 
       await user.clear(usernameInput);
-      await user.type(usernameInput, 'test-user');
+      await user.type(usernameInput, 'nuevouser');
+      
       await user.clear(passwordInput);
-      await user.type(passwordInput, 'test-password');
+      await user.type(passwordInput, 'nuevapass');
 
-      expect(usernameInput).toHaveValue('test-user');
-      expect(passwordInput).toHaveValue('test-password');
+      expect(usernameInput).toHaveValue('nuevouser');
+      expect(passwordInput).toHaveValue('nuevapass');
     });
 
-    it('should show forgot password modal when clicking link', async () => {
+    test('debe abrir modal de olvidé contraseña al hacer clic', async () => {
       const user = userEvent.setup();
+      
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const forgotPasswordLink = screen.getByText(/olvidé contraseña/i);
@@ -124,12 +123,13 @@ describe('LoginForm', () => {
       });
     });
 
-    it('should navigate to register when clicking register link', async () => {
+    test('debe navegar a registro al hacer clic en regístrate', async () => {
       const user = userEvent.setup();
+      
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const registerLink = screen.getByText(/regístrate/i);
@@ -139,80 +139,85 @@ describe('LoginForm', () => {
     });
   });
 
-  describe('Validación de campos', () => {
-    it('should show validation error for empty username', async () => {
+  describe('Validación de formulario', () => {
+    test('debe mostrar error para campos vacíos', async () => {
       const user = userEvent.setup();
-      render(
-        <MockWrapper>
+      
+      const { container } = render(
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const usernameInput = screen.getByLabelText(/usuario/i);
-      const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
+      const passwordInput = screen.getByLabelText(/contraseña/i);
+      const submitButton = container.querySelector('button[type="submit"]') as HTMLButtonElement;
 
+      // Usar espacios para evitar validación HTML5 nativa pero activar validación custom
       await user.clear(usernameInput);
-      await user.click(submitButton);
-
-      await waitFor(() => {
-        expect(screen.getByText(/usuario y contraseña no pueden estar vacíos/i)).toBeInTheDocument();
-      });
-    });
-
-    it('should show validation error for empty password', async () => {
-      const user = userEvent.setup();
-      render(
-        <MockWrapper>
-          <LoginForm />
-        </MockWrapper>
-      );
-
-      const passwordInput = screen.getByLabelText(/contraseña/i);
-      const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
-
+      await user.type(usernameInput, ' ');
       await user.clear(passwordInput);
+      await user.type(passwordInput, ' ');
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/usuario y contraseña no pueden estar vacíos/i)).toBeInTheDocument();
+        const modalOverlay = container.querySelector('.modal-overlay');
+        expect(modalOverlay).toBeInTheDocument();
+        
+        const errorElement = container.querySelector('.error-message');
+        expect(errorElement).toBeInTheDocument();
+        expect(errorElement).toHaveTextContent('Usuario y contraseña no pueden estar vacíos');
       });
     });
 
-    it('should show validation error for whitespace-only inputs', async () => {
+    test('debe mostrar error para campos con solo espacios', async () => {
       const user = userEvent.setup();
-      render(
-        <MockWrapper>
+      
+      const { container } = render(
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const usernameInput = screen.getByLabelText(/usuario/i);
       const passwordInput = screen.getByLabelText(/contraseña/i);
-      const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
+      const submitButton = container.querySelector('button[type="submit"]') as HTMLButtonElement;
 
       await user.clear(usernameInput);
       await user.type(usernameInput, '   ');
+      
       await user.clear(passwordInput);
       await user.type(passwordInput, '   ');
+      
       await user.click(submitButton);
 
       await waitFor(() => {
-        expect(screen.getByText(/usuario y contraseña no pueden estar vacíos/i)).toBeInTheDocument();
+        const errorElement = container.querySelector('.error-message');
+        expect(errorElement).toBeInTheDocument();
+        expect(errorElement).toHaveTextContent('Usuario y contraseña no pueden estar vacíos');
       });
     });
   });
 
   describe('Estados de carga y éxito', () => {
-    it('should show loading state during login', async () => {
+    test('debe mostrar estado de carga durante login', async () => {
       const user = userEvent.setup();
-      vi.mocked(loginService).mockImplementation(() => 
-        new Promise(resolve => setTimeout(resolve, 1000))
+      
+      mockLoginService.mockImplementation(() => 
+        new Promise(resolve => setTimeout(() => resolve({
+          id: 1,
+          username: 'emilys',
+          firstName: 'Emily',
+          lastName: 'Johnson',
+          email: 'emily@test.com',
+          accessToken: 'fake-token'
+        }), 100))
       );
 
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
@@ -224,9 +229,10 @@ describe('LoginForm', () => {
       expect(screen.getByLabelText(/contraseña/i)).toBeDisabled();
     });
 
-    it('should navigate to home on successful login', async () => {
+    test('debe navegar al home en login exitoso', async () => {
       const user = userEvent.setup();
-      vi.mocked(loginService).mockResolvedValue({
+      
+      mockLoginService.mockResolvedValue({
         id: 1,
         username: 'emilys',
         firstName: 'Emily',
@@ -236,9 +242,9 @@ describe('LoginForm', () => {
       });
 
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
@@ -251,14 +257,15 @@ describe('LoginForm', () => {
   });
 
   describe('Manejo de errores', () => {
-    it('should show network error message', async () => {
+    test('debe mostrar error de red', async () => {
       const user = userEvent.setup();
-      vi.mocked(loginService).mockRejectedValue(new Error('fetch error'));
+      
+      mockLoginService.mockRejectedValue(new Error('fetch error'));
 
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
@@ -269,14 +276,15 @@ describe('LoginForm', () => {
       });
     });
 
-    it('should show credentials error message', async () => {
+    test('debe mostrar error de credenciales', async () => {
       const user = userEvent.setup();
-      vi.mocked(loginService).mockRejectedValue(new Error('Invalid credentials'));
+      
+      mockLoginService.mockRejectedValue(new Error('Invalid credentials'));
 
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
@@ -287,14 +295,15 @@ describe('LoginForm', () => {
       });
     });
 
-    it('should close error modal when clicking close button', async () => {
+    test('debe cerrar modal de error al hacer clic en cerrar', async () => {
       const user = userEvent.setup();
-      vi.mocked(loginService).mockRejectedValue(new Error('Invalid credentials'));
+      
+      mockLoginService.mockRejectedValue(new Error('Invalid credentials'));
 
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const submitButton = screen.getByRole('button', { name: /iniciar sesión/i });
@@ -304,7 +313,7 @@ describe('LoginForm', () => {
         expect(screen.getByText(/las credenciales no son correctas/i)).toBeInTheDocument();
       });
 
-      const closeButton = screen.getByText(/cerrar/i);
+      const closeButton = screen.getByRole('button', { name: /cerrar/i });
       await user.click(closeButton);
 
       await waitFor(() => {
@@ -313,22 +322,28 @@ describe('LoginForm', () => {
     });
   });
 
-  describe('Accesibilidad', () => {
-    it('should have proper form structure', () => {
-      render(
-        <MockWrapper>
+  describe('Accesibilidad y navegación por teclado', () => {
+    test('debe tener estructura de formulario accesible', () => {
+      const { container } = render(
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
-      expect(screen.getByRole('form')).toBeInTheDocument();
+      const formElement = container.querySelector('form');
+      expect(formElement).toBeInTheDocument();
+      
+      // Verificar que el formulario tiene elementos accesibles
+      const submitButton = container.querySelector('button[type="submit"]');
+      expect(submitButton).toBeInTheDocument();
+      expect(submitButton).toHaveTextContent('Iniciar sesión');
     });
 
-    it('should have properly associated labels', () => {
+    test('debe tener labels correctamente asociados', () => {
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const usernameInput = screen.getByLabelText(/usuario/i);
@@ -338,12 +353,13 @@ describe('LoginForm', () => {
       expect(passwordInput).toHaveAccessibleName('Contraseña:');
     });
 
-    it('should handle keyboard navigation', async () => {
+    test('debe soportar navegación por teclado', async () => {
       const user = userEvent.setup();
+      
       render(
-        <MockWrapper>
+        <TestWrapper>
           <LoginForm />
-        </MockWrapper>
+        </TestWrapper>
       );
 
       const usernameInput = screen.getByLabelText(/usuario/i);

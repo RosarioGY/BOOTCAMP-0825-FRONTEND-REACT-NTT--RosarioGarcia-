@@ -9,12 +9,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const cached = localStorage.getItem('auth:user');
-    if (cached) {
-      try {
-        setUser(JSON.parse(cached));
-      } catch {
-        localStorage.removeItem('auth:user');
+    // Verificar si localStorage está disponible
+    if (typeof localStorage !== 'undefined') {
+      const cached = localStorage.getItem('auth:user');
+      if (cached) {
+        try {
+          setUser(JSON.parse(cached));
+        } catch {
+          localStorage.removeItem('auth:user');
+        }
       }
     }
   }, []);
@@ -22,14 +25,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const login = async (credentials: AuthCredentials) => {
     const userData = await loginService(credentials);
     setUser(userData);
-    localStorage.setItem('auth:user', JSON.stringify(userData));
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('auth:user', JSON.stringify(userData));
+    }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('auth:user');
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem('auth:user');
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+    }
   };
 
   const value: AuthContextValue = useMemo(
