@@ -1,15 +1,13 @@
 // HomePage.tsx - Home page component
 import { useState } from 'react';
 import { useProducts, useFilteredProducts } from '@/modules/home/hooks/useProducts';
-import SearchBox from '@/modules/home/components/SearchBox';
-import CategoryFilter from '@/modules/home/components/CategoryFilter';
-import ProductCard from '@/modules/home/components/ProductCard';
-import Pagination from '@/modules/home/components/Pagination';
+import CategoryChips from '@/modules/home/components/CategoryFilter';
 import { usePagination } from '@/modules/home/hooks/usePagination';
 import { useCart } from '@/modules/cart/hooks/useCart';
 import { Modal } from '@/shared/components/ui/Modal';
 import { Alert } from '@/shared/components/ui/Alert';
 import { Layout } from '@/shared/components/layout/Layout';
+import { CATEGORY_ES, formatPricePEN } from '@/shared/utils/locale';
 
 export function HomePage() {
   const { loading, products, categories, error } = useProducts();
@@ -18,46 +16,90 @@ export function HomePage() {
   const [stockModal, setStockModal] = useState<string | null>(null);
   const { addOne } = useCart();
 
-  const list = useFilteredProducts(products, term, category);
-  const { page, totalPages, pageItems, go, setPage } = usePagination(list, 12);
+  const filteredProducts = useFilteredProducts(products, term, category);
+  const { page, totalPages, pageItems, next, prev, setPage } = usePagination(filteredProducts, 12);
 
-  const onClear = () => { setTerm(''); setPage(1); };
   const onSelectCategory = (c: 'Todos' | string) => { setCategory(c); setPage(1); };
 
-  const onAddToCart = (p: (typeof products)[number]) => {
+  const addToCart = (p: (typeof products)[number]) => {
     const res = addOne({ id: p.id, title: p.title, price: p.price, thumbnail: p.thumbnail, stock: p.stock });
     if (res === 'out_of_stock') setStockModal(`Ya no hay más stock disponible para "${p.title}".`);
   };
+
+  // Generar array de páginas para el paginador
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 
   if (loading) return <Layout><p style={{ padding: 16 }}>Cargando productos…</p></Layout>;
   if (error)   return <Layout><Alert type="error" message={error} /></Layout>;
 
   return (
     <Layout>
-      <section style={{ display: 'grid', gap: 16, padding: 16 }}>
-      <div style={{ display: 'grid', gap: 10 }}>
-        <SearchBox value={term} onChange={setTerm} onClear={onClear} />
-        <CategoryFilter categories={categories} selected={category} onSelect={onSelectCategory} />
-      </div>
+      <main className="app-container home-page">
+        <header>
+          <h1>Catálogo de Productos</h1>
+        </header>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))',
-          gap: 12
-        }}
-      >
-        {pageItems.map(p => (
-          <ProductCard key={p.id} product={p} onAddToCart={onAddToCart} />
-        ))}
-      </div>
+        <div className="filters">
+          <input
+            type="text"
+            placeholder="Buscar productos… (mínimo 3 caracteres)"
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+          />
 
-      <Pagination page={page} totalPages={totalPages} onChange={go} />
+          <CategoryChips
+            categories={categories}
+            selected={category}
+            onSelect={onSelectCategory}
+          />
+        </div>
 
-      <Modal isOpen={!!stockModal} onClose={() => setStockModal(null)} title="Stock insuficiente">
-        <Alert type="warning" message={stockModal || ''} />
-      </Modal>
-    </section>
+        {pageItems.length === 0 ? (
+          <div className="empty-state">No hay productos para esta selección.</div>
+        ) : (
+          <div className="product-grid">
+            {pageItems.map(p => (
+              <article className="product-card" key={p.id}>
+                <div className="product-media">
+                  <img src={p.thumbnail} alt={p.title} />
+                </div>
+
+                <h3 className="product-title">{p.title}</h3>
+                <div className="product-meta">{p.brand} · {CATEGORY_ES[p.category] ?? p.category}</div>
+
+                <div className="product-bottom">
+                  <div className="product-price">{formatPricePEN(p.price)}</div>
+                  <button className="add-to-cart" onClick={() => addToCart(p)}>
+                    Agregar al carrito
+                  </button>
+                  <div className="product-stock">Stock: {p.stock}</div>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+
+        {/* Paginador */}
+        {totalPages > 1 && (
+          <div className="pager">
+            <button className="pager-nav" onClick={prev} disabled={page === 1}>‹</button>
+            {pages.map(n => (
+              <button
+                key={n}
+                className={`pager-page ${page === n ? 'is-active' : ''}`}
+                onClick={() => setPage(n)}
+              >
+                {n}
+              </button>
+            ))}
+            <button className="pager-nav" onClick={next} disabled={page === totalPages}>›</button>
+          </div>
+        )}
+
+        <Modal isOpen={!!stockModal} onClose={() => setStockModal(null)} title="Stock insuficiente">
+          <Alert type="warning" message={stockModal || ''} />
+        </Modal>
+      </main>
     </Layout>
   );
 }

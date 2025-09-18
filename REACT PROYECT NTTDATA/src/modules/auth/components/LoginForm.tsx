@@ -46,60 +46,62 @@ export function LoginForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="form-group">
-          <label htmlFor="username">Usuario:</label>
-          <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-            required
-            disabled={isLoading}
-          />
-        </div>
-        
-        <div className="form-group">
-          <label htmlFor="password">Contraseña:</label>
-          <input
-            id="password"
-            type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
-            disabled={isLoading}
-          />
-        </div>
-        
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
-        </button>
+      <div className="login-form">
+        <h1 className="login-title">Iniciar sesión</h1>
 
-        <a 
-          href="#" 
-          className="forgot-password-link"
-          onClick={(e) => {
-            e.preventDefault();
-            setShowForgotPassword(true);
-          }}
-        >
-          Olvidé Contraseña
-        </a>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Usuario:</label>
+            <input
+              id="username"
+              type="text"
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+          
+          <div className="form-group">
+            <label htmlFor="password">Contraseña:</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              disabled={isLoading}
+            />
+          </div>
+          
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? 'Iniciando sesión...' : 'Iniciar sesión'}
+          </button>
 
-        <div className="auth-links">
-          <span>¿No tienes una cuenta? </span>
           <a 
             href="#" 
-            className="register-link"
+            className="forgot-password-link"
             onClick={(e) => {
               e.preventDefault();
-              navigate(ROUTES.register);
+              setShowForgotPassword(true);
             }}
           >
-            Regístrate
+            Olvidé Contraseña
           </a>
-        </div>
-      </form>
+
+          <p className="auth-links">
+            ¿No tienes una cuenta? <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(ROUTES.register);
+              }}
+            >
+              Regístrate
+            </a>
+          </p>
+        </form>
+      </div>
 
       {/* Modal de Error */}
       <Modal

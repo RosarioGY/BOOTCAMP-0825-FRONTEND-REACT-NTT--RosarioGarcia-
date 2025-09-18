@@ -1,7 +1,9 @@
+import { formatPricePEN } from '@/shared/utils/locale';
+
 export function CartTotal({ total }: { total: number }) {
   return (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
-      <strong style={{ fontSize: 18 }}>Total: ${total.toFixed(2)}</strong>
+    <div className="cart-total" style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
+      <span>Total:</span> <strong>{formatPricePEN(total)}</strong>
     </div>
   );
 }

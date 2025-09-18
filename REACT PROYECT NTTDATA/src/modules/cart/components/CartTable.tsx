@@ -1,5 +1,6 @@
 import type { CartItem } from '@/modules/cart/types/cart.types';
 import QuantityControl from '@/modules/cart/components/QuantityControl';
+import { formatPricePEN } from '@/shared/utils/locale';
 
 type Props = {
   items: CartItem[];
@@ -30,7 +31,7 @@ export default function CartTable({ items, onInc, onDec, onRemove }: Props) {
               <img src={it.thumbnail} alt={it.title} style={{ width: 72, height: 48, objectFit: 'cover', borderRadius: 8 }} />
             </td>
             <td style={{ padding: 8 }}>{it.title}</td>
-            <td style={{ padding: 8 }}>${it.price.toFixed(2)}</td>
+            <td className="col-price">{formatPricePEN(it.price)}</td>
             <td style={{ padding: 8 }}>
               <QuantityControl
                 qty={it.qty}

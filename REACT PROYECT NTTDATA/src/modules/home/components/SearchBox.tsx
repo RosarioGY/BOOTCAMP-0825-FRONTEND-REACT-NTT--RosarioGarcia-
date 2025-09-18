@@ -1,3 +1,5 @@
+import { uiES } from '@/shared/utils/locale';
+
 type Props = {
   value: string;
   onChange: (v: string) => void;
@@ -11,7 +13,7 @@ export default function SearchBox({ value, onChange, onClear }: Props) {
       <input
         value={value}
         onChange={e => onChange(e.target.value)}
-        placeholder="Buscar productos… (mínimo 3 caracteres)"
+        placeholder={uiES.searchPlaceholder}
         style={{ width: '100%', padding: '10px 36px 10px 12px', borderRadius: 10, border: '1px solid #cbd5e1' }}
       />
       {value && (

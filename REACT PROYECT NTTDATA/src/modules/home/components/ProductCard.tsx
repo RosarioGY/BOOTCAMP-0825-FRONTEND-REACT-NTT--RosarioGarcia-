@@ -1,5 +1,5 @@
 import type { Product } from '@/modules/home/types/products.types';
-import { Button } from '@/shared/components/ui/Button';
+import { CATEGORY_ES, uiES, formatPricePEN, usdToPen, capitalize } from '@/shared/utils/locale';
 
 type Props = {
   product: Product;
@@ -7,22 +7,27 @@ type Props = {
 };
 
 export default function ProductCard({ product, onAddToCart }: Props) {
+  // si product.currency === 'USD' -> conviertes; si ya está en PEN, omite usdToPen
+  const pricePen = formatPricePEN(usdToPen(product.price)); 
+
   return (
-    <article
-      style={{
-        border: '1px solid #e5e7eb', borderRadius: 12, overflow: 'hidden',
-        display: 'flex', flexDirection: 'column'
-      }}
-    >
-      <img src={product.thumbnail} alt={product.title} style={{ aspectRatio: '16/10', objectFit: 'cover' }} />
-      <div style={{ padding: 12, display: 'grid', gap: 6 }}>
-        <strong>{product.title}</strong>
-        <small style={{ color: '#64748b' }}>{product.brand} · {product.category}</small>
-        <div style={{ marginTop: 'auto', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontWeight: 700 }}>${product.price.toFixed(2)}</span>
-          <Button type="button" onClick={() => onAddToCart(product)}>Agregar al carrito</Button>
-        </div>
-        <small style={{ color: '#475569' }}>Stock: {product.stock}</small>
+    <article className="product-card">
+      <div className="product-media">
+        <img src={product.thumbnail} alt={product.title} />
+      </div>
+
+      <h3 className="product-title">{product.title}</h3>
+
+      <div className="product-meta">
+        {product.brand} · {CATEGORY_ES[product.category] ?? capitalize(product.category)}
+      </div>
+
+      <div className="product-bottom">
+        <div className="product-price">{pricePen}</div>
+        <button className="add-to-cart" onClick={() => onAddToCart(product)}>
+          {uiES.addToCart}
+        </button>
+        <div className="product-stock">{uiES.stock}: {product.stock}</div>
       </div>
     </article>
   );
