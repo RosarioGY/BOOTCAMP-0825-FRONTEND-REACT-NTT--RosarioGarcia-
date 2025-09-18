@@ -887,6 +887,113 @@ button:disabled { background-color: #a3a3a3; cursor: not-allowed; }
   font-weight: 800;
 }
 
+/* —— Página de login con fondo —— */
+.login-page{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  background-image: url('/login.png'); /* <- imagen turquesa que debes guardar manualmente */
+  background-size: cover; /* Llenar toda la pantalla */
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  overflow: hidden; /* Evitar scroll */
+}
+
+/* Oscurecedor para legibilidad con toque turquesa */
+.login-page::before{
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom right,
+    rgba(0,0,0,.25),
+    rgba(32,178,170,.15)
+  );
+  z-index: 0;
+}
+
+/* Asegura que la tarjeta esté encima del overlay */
+.login-form{
+  position: relative;
+  z-index: 1;
+  max-width: 560px;
+  width: 100%;
+  padding: 2.5rem 3rem;
+  background: rgba(255,255,255,.92);      /* blanco con transparencia */
+  backdrop-filter: saturate(140%) blur(6px); /* vidrio esmerilado */
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.2);
+}
+
+/* Título del login */
+.login-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #111827;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 640px){
+  .login-form{ padding: 1.5rem; }
+  .login-title { font-size: 1.75rem; }
+}
+
+/* Ajustes para pantallas horizontales - forzar que ocupe toda la pantalla */
+@media (orientation: landscape) {
+  .login-page {
+    background-size: cover !important;
+    background-position: center !important;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .login-form {
+    max-width: 500px;
+    padding: 2rem;
+  }
+}
+
+/* Ajustes específicos para pantallas muy anchas */
+@media (min-aspect-ratio: 21/9) {
+  .login-page {
+    background-position: center top;
+  }
+}
+
+/* Ajustes para móviles en horizontal */
+@media (max-width: 767px) and (orientation: landscape) {
+  .login-page {
+    padding: 16px;
+    height: 100vh;
+  }
+  
+  .login-form {
+    max-width: 400px;
+    padding: 1.5rem;
+  }
+  
+  .login-title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
 /* —— Ajustes responsive —— */
 @media (max-width: 720px){
   .app-container{ padding:16px; }

@@ -46,10 +46,7 @@ export function LoginForm() {
 
   return (
     <>
-      <div className="login-form">
-        <h1 className="login-title">Iniciar sesión</h1>
-
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Usuario:</label>
             <input
@@ -101,7 +98,6 @@ export function LoginForm() {
             </a>
           </p>
         </form>
-      </div>
 
       {/* Modal de Error */}
       <Modal
