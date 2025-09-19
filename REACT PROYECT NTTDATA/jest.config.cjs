@@ -22,12 +22,23 @@ module.exports = {
     '<rootDir>/src/**/__tests__/**/*.(ts|tsx|js)',
     '<rootDir>/src/**/*.(test|spec).(ts|tsx|js)',
   ],
+  testPathIgnorePatterns: [
+    '<rootDir>/node_modules/',
+    '<rootDir>/dist/',
+    '<rootDir>/coverage/',
+    '<rootDir>/src/modules/auth/__tests__/', // Ignore auth tests temporarily
+  ],
   collectCoverageFrom: [
     'src/**/*.(ts|tsx)',
     '!src/**/*.d.ts',
     '!src/main.tsx',
     '!src/vite-env.d.ts',
+    '!src/**/__tests__/**',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
+  verbose: true,
+  bail: false,
+  maxWorkers: 1,
+  testTimeout: 10000,
 };

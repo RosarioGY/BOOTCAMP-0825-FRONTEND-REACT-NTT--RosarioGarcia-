@@ -8,8 +8,12 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest --config jest.config.cjs",
-    "test:coverage": "jest --coverage"
+    "test": "jest --config jest.config.cjs --passWithNoTests --watchAll=false",
+    "test:coverage": "jest --config jest.config.cjs --coverage --passWithNoTests --watchAll=false",
+    "test:watch": "jest --config jest.config.cjs --watch",
+    "test:cart": "jest --config jest.config.cjs src/modules/cart/__tests__ --passWithNoTests",
+    "test:home": "jest --config jest.config.cjs src/modules/home/__tests__ --passWithNoTests",
+    "test:ci": "jest --config jest.config.cjs --passWithNoTests --watchAll=false --coverage --verbose"
   },
   "dependencies": {
     "react": "^19.1.1",
