@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/27</span>
+                <span class='fraction'>0/29</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/26</span>
+                <span class='fraction'>0/28</span>
             </div>
         
             
@@ -110,7 +110,12 @@
 <a name='L45'></a><a href='#L45'>45</a>
 <a name='L46'></a><a href='#L46'>46</a>
 <a name='L47'></a><a href='#L47'>47</a>
-<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -138,6 +143,11 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,7 +168,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// AuthProvider.tsx - Authentication provider component
-<span class="cstat-no" title="statement not covered" >import { useMemo, useState, useEffect } from 'react';</span>
+<span class="cstat-no" title="statement not covered" >import { useMemo, useState, useEffect, useCallback } from 'react';</span>
 import type { ReactNode } from 'react';
 import type { User, AuthCredentials } from '@/modules/auth/types/auth.types';
 <span class="cstat-no" title="statement not covered" >import { AuthContext, type AuthContextValue } from '@/modules/auth/context/AuthContext';</span>
@@ -181,26 +191,31 @@ import type { User, AuthCredentials } from '@/modules/auth/types/auth.types';
     }
   }, []);
 &nbsp;
-  const login = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async (c</span>redentials: AuthCredentials) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span></span>
-    const userData = <span class="cstat-no" title="statement not covered" >await loginService(credentials);</span>
-<span class="cstat-no" title="statement not covered" >    setUser(userData);</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof localStorage !== 'undefined') {</span>
-<span class="cstat-no" title="statement not covered" >      localStorage.setItem('auth:user', JSON.stringify(userData));</span>
+  const login = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >async (c</span>redentials: AuthCredentials) =&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" > {</span></span></span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+      const userData = <span class="cstat-no" title="statement not covered" >await loginService(credentials);</span>
+<span class="cstat-no" title="statement not covered" >      setUser(userData);</span>
+<span class="cstat-no" title="statement not covered" >      <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof localStorage !== 'undefined') {</span>
+<span class="cstat-no" title="statement not covered" >        localStorage.setItem('auth:user', JSON.stringify(userData));</span>
+      }
+    } catch (error) {
+      // Handle login errors silently - error handling is done at the UI level
+<span class="cstat-no" title="statement not covered" >      console.error('Login failed:', error);</span>
     }
-  };
+  }, []);
 &nbsp;
-  const logout = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
+  const logout = <span class="cstat-no" title="statement not covered" >useCallback(<span class="fstat-no" title="function not covered" >() =</span>&gt; {</span>
 <span class="cstat-no" title="statement not covered" >    setUser(null);</span>
 <span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (typeof localStorage !== 'undefined') {</span>
 <span class="cstat-no" title="statement not covered" >      localStorage.removeItem('auth:user');</span>
 <span class="cstat-no" title="statement not covered" >      localStorage.removeItem('accessToken');</span>
 <span class="cstat-no" title="statement not covered" >      localStorage.removeItem('refreshToken');</span>
     }
-  };
+  }, []);
 &nbsp;
   const value: AuthContextValue = <span class="cstat-no" title="statement not covered" >useMemo(</span>
 <span class="fstat-no" title="function not covered" >    () =</span>&gt; (<span class="cstat-no" title="statement not covered" >{ user, login, logout, isAuthenticated: !!user })</span>,
-    [user]
+    [user, login, logout]
   );
 &nbsp;
 <span class="cstat-no" title="statement not covered" >  return &lt;AuthContext.Provider value={value}&gt;{children}&lt;/AuthContext.Provider&gt;;</span>
@@ -211,7 +226,7 @@ import type { User, AuthCredentials } from '@/modules/auth/types/auth.types';
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-19T16:49:02.919Z
+                at 2025-09-19T21:29:14.699Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>

@@ -1,5 +1,5 @@
 // AuthProvider.tsx - Authentication provider component
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import type { User, AuthCredentials } from '@/modules/auth/types/auth.types';
 import { AuthContext, type AuthContextValue } from '@/modules/auth/context/AuthContext';
@@ -22,26 +22,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const login = async (credentials: AuthCredentials) => {
-    const userData = await loginService(credentials);
-    setUser(userData);
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('auth:user', JSON.stringify(userData));
+  const login = useCallback(async (credentials: AuthCredentials) => {
+    try {
+      const userData = await loginService(credentials);
+      setUser(userData);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('auth:user', JSON.stringify(userData));
+      }
+    } catch (error) {
+      // Handle login errors silently - error handling is done at the UI level
+      console.error('Login failed:', error);
     }
-  };
+  }, []);
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUser(null);
     if (typeof localStorage !== 'undefined') {
       localStorage.removeItem('auth:user');
       localStorage.removeItem('accessToken');
       localStorage.removeItem('refreshToken');
     }
-  };
+  }, []);
 
   const value: AuthContextValue = useMemo(
     () => ({ user, login, logout, isAuthenticated: !!user }),
-    [user]
+    [user, login, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -54,7 +54,6 @@ export function LoginForm() {
               type="text"
               value={username}
               onChange={e => setUsername(e.target.value)}
-              required
               disabled={isLoading}
             />
           </div>
@@ -66,7 +65,6 @@ export function LoginForm() {
               type="password"
               value={password}
               onChange={e => setPassword(e.target.value)}
-              required
               disabled={isLoading}
             />
           </div>
@@ -109,6 +107,7 @@ export function LoginForm() {
         <button 
           onClick={() => setShowErrorModal(false)}
           style={{ marginTop: '1rem' }}
+          aria-label="Cerrar modal de error"
         >
           Cerrar
         </button>

@@ -66,7 +66,7 @@ export function ForgotPasswordModal({ isOpen, onClose }: ForgotPasswordModalProp
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} noValidate>
           {error && <div className="error-message">{error}</div>}
           
           <div className="form-group">
@@ -75,7 +75,10 @@ export function ForgotPasswordModal({ isOpen, onClose }: ForgotPasswordModalProp
               id="email"
               type="email"
               value={email}
-              onChange={e => setEmail(e.target.value)}
+              onChange={e => {
+                setEmail(e.target.value);
+                if (error) setError(null);
+              }}
               placeholder="ejemplo@correo.com"
               disabled={isLoading}
               required

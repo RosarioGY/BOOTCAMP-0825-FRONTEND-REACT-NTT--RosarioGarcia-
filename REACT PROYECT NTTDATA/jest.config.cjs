@@ -26,7 +26,6 @@ module.exports = {
     '<rootDir>/node_modules/',
     '<rootDir>/dist/',
     '<rootDir>/coverage/',
-    '<rootDir>/src/modules/auth/__tests__/', // Ignore auth tests temporarily
   ],
   collectCoverageFrom: [
     'src/**/*.(ts|tsx)',

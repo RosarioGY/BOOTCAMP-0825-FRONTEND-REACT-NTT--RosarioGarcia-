@@ -68,8 +68,18 @@ export function RegisterForm() {
       return;
     }
     
+    // Trim whitespace from string fields before submitting
+    const trimmedFormData = {
+      ...formData,
+      firstName: formData.firstName.trim(),
+      lastName: formData.lastName.trim(),
+      username: formData.username.trim(),
+      email: formData.email.trim(),
+      password: formData.password.trim(),
+    };
+    
     try {
-      await register(formData);
+      await register(trimmedFormData);
       setShowSuccessModal(true);
     } catch (error) {
       // El error ya se maneja en el hook useRegister
@@ -89,7 +99,7 @@ export function RegisterForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="register-form">
+      <form onSubmit={handleSubmit} className="register-form" role="form">
         <div className="form-row">
           <div className="form-group">
             <label htmlFor="firstName">Nombre *</label>
