@@ -13,6 +13,7 @@ module.exports = {
         jsx: 'react-jsx',
         esModuleInterop: true,
         allowSyntheticDefaultImports: true,
+        resolveJsonModule: true,
       },
     }],
     '^.+\\.(js|jsx)$': 'babel-jest',

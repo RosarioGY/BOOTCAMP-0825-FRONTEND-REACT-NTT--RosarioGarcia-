@@ -1,6 +1,6 @@
 // ForgotPasswordModal.test.tsx - Unit tests for ForgotPasswordModal component
 import '@testing-library/jest-dom';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { ForgotPasswordModal } from '@/modules/auth/components/ForgotPasswordModal';
 
 // Mock dependencies
@@ -152,7 +152,9 @@ describe('ForgotPasswordModal Component', () => {
       fireEvent.click(submitButton);
 
       // Fast-forward time to complete the async operation
-      jest.advanceTimersByTime(1000);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
 
       await waitFor(() => {
         expect(screen.getByText(/email enviado/i)).toBeInTheDocument();
@@ -170,10 +172,16 @@ describe('ForgotPasswordModal Component', () => {
       const submitButton = screen.getByRole('button', { name: /enviar enlace de recuperación/i });
       fireEvent.click(submitButton);
 
-      jest.advanceTimersByTime(1000);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
 
       await waitFor(() => {
-        expect(screen.getByRole('button', { name: /cerrar/i })).toBeInTheDocument();
+        const closeButtons = screen.getAllByRole('button', { name: /cerrar/i });
+        expect(closeButtons.length).toBeGreaterThan(0);
+        // The success state should have at least one close button
+        const successCloseButton = closeButtons.find(btn => btn.textContent === 'Cerrar');
+        expect(successCloseButton).toBeInTheDocument();
       });
     });
   });
@@ -198,7 +206,9 @@ describe('ForgotPasswordModal Component', () => {
       const submitButton = screen.getByRole('button', { name: /enviar enlace de recuperación/i });
       fireEvent.click(submitButton);
 
-      jest.advanceTimersByTime(1000);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
 
       await waitFor(() => {
         expect(screen.getByText(/email enviado/i)).toBeInTheDocument();
@@ -302,7 +312,9 @@ describe('ForgotPasswordModal Component', () => {
       const submitButton = screen.getByRole('button', { name: /enviar enlace de recuperación/i });
       fireEvent.click(submitButton);
 
-      jest.advanceTimersByTime(1000);
+      act(() => {
+        jest.advanceTimersByTime(1000);
+      });
 
       await waitFor(() => {
         expect(screen.getByText(/email enviado/i)).toBeInTheDocument();

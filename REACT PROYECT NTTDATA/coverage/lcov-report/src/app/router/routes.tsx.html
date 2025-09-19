@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/11</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,25 +91,25 @@
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -118,17 +118,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// routes.tsx - Route definitions
-<span class="cstat-no" title="statement not covered" >import { ROUTES } from '@/shared/constants/routes';</span>
-<span class="cstat-no" title="statement not covered" >import { LoginPage } from '@/modules/auth/pages/LoginPage';</span>
-<span class="cstat-no" title="statement not covered" >import { RegisterPage } from '@/modules/auth/pages/RegisterPage';</span>
-<span class="cstat-no" title="statement not covered" >import { HomePage } from '@/modules/home/pages/HomePage';</span>
-<span class="cstat-no" title="statement not covered" >import { CartPage } from '@/modules/cart/pages/CartPage';</span>
-<span class="cstat-no" title="statement not covered" >import { SummaryPage } from '@/modules/cart/pages/SummaryPage';</span>
-<span class="cstat-no" title="statement not covered" >import { withAuthGuard } from '@/app/router/withAuthGuard';</span>
+import { ROUTES } from '@/shared/constants/routes';
+import { LoginPage } from '@/modules/auth/pages/LoginPage';
+import { RegisterPage } from '@/modules/auth/pages/RegisterPage';
+import { HomePage } from '@/modules/home/pages/HomePage';
+import { CartPage } from '@/modules/cart/pages/CartPage';
+import { SummaryPage } from '@/modules/cart/pages/SummaryPage';
+import { withAuthGuard } from '@/app/router/withAuthGuard';
 &nbsp;
-const ProtectedHomePage = <span class="cstat-no" title="statement not covered" >withAuthGuard(HomePage);</span>
-const ProtectedCartPage = <span class="cstat-no" title="statement not covered" >withAuthGuard(CartPage);</span>
-const ProtectedSummaryPage = <span class="cstat-no" title="statement not covered" >withAuthGuard(SummaryPage);</span>
+const ProtectedHomePage = withAuthGuard(HomePage);
+const ProtectedCartPage = withAuthGuard(CartPage);
+const ProtectedSummaryPage = withAuthGuard(SummaryPage);
 &nbsp;
 export interface AppRoute {
   path: string;
@@ -136,7 +136,7 @@ export interface AppRoute {
   isProtected?: boolean;
 }
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >appRoutes: AppRoute[] = [</span>
+export const appRoutes: AppRoute[] = [
   { path: '/', element: &lt;ProtectedHomePage /&gt;, isProtected: true },
   { path: ROUTES.login, element: &lt;LoginPage /&gt;, isProtected: false },
   { path: ROUTES.register, element: &lt;RegisterPage /&gt;, isProtected: false },
@@ -151,7 +151,7 @@ export const <span class="cstat-no" title="statement not covered" >appRoutes: Ap
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-19T21:44:12.274Z
+                at 2025-09-19T22:57:16.694Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

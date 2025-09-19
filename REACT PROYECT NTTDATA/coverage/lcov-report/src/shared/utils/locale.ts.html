@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -103,7 +103,7 @@
 <a name='L38'></a><a href='#L38'>38</a>
 <a name='L39'></a><a href='#L39'>39</a>
 <a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -121,7 +121,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,19 +130,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// src/utils/locale.ts
-export const <span class="cstat-no" title="statement not covered" >CATEGORY_ES: Record&lt;string, string&gt; = {</span>
+export const CATEGORY_ES: Record&lt;string, string&gt; = {
   beauty: "Belleza",
   furniture: "Muebles",
   fragrances: "Fragancias",
@@ -160,7 +160,7 @@ export const <span class="cstat-no" title="statement not covered" >CATEGORY_ES: 
   "womens-shoes": "Zapatos de mujer",
 };
 &nbsp;
-export const <span class="cstat-no" title="statement not covered" >uiES = {</span>
+export const uiES = {
   addToCart: "Agregar al carrito",
   stock: "Stock",
   searchPlaceholder: "Buscar productos… (mínimo 3 caracteres)",
@@ -169,17 +169,17 @@ export const <span class="cstat-no" title="statement not covered" >uiES = {</spa
 &nbsp;
 // —— Formato de moneda en PEN ——
 // Si tu API ya viene en PEN, SOLO usa formatPricePEN(amount)
-export const <span class="cstat-no" title="statement not covered" >formatPricePEN = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>a</span>mount: number) =&gt;</span>
-<span class="cstat-no" title="statement not covered" >  new Intl.NumberFormat("es-PE", { style: "currency", currency: "PEN" }).format(amount);</span>
+export const formatPricePEN = (amount: number) =&gt;
+  new Intl.NumberFormat("es-PE", { style: "currency", currency: "PEN" }).format(amount);
 &nbsp;
 // (Opcional) conversión USD → PEN. Ajusta el tipo de cambio según necesites.
-export const <span class="cstat-no" title="statement not covered" >USD_TO_PEN = 3.75; </span>// cámbialo cuando quieras
-export const <span class="cstat-no" title="statement not covered" >usdToPen = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>u</span>sd: number, rate = <span class="branch-0 cbranch-no" title="branch not covered" >USD_TO_PEN)</span> =&gt; <span class="cstat-no" title="statement not covered" >usd * rate;</span></span>
+export const USD_TO_PEN = 3.75; // cámbialo cuando quieras
+export const usdToPen = (usd: number, rate = USD_TO_PEN) =&gt; usd * rate;
 &nbsp;
 // Función para capitalizar la primera letra
-export const <span class="cstat-no" title="statement not covered" >capitalize = <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >(</span>t</span>ext: string): string =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  <span class="missing-if-branch" title="if path not taken" >I</span>if (!text) <span class="cstat-no" title="statement not covered" >return text;</span></span>
-<span class="cstat-no" title="statement not covered" >  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();</span>
+export const capitalize = (text: string): string =&gt; {
+  if (!text) return text;
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 };</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -187,7 +187,7 @@ export const <span class="cstat-no" title="statement not covered" >capitalize = 
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-19T21:44:12.274Z
+                at 2025-09-19T22:57:16.694Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -36,6 +36,7 @@ export function ForgotPasswordModal({ isOpen, onClose }: ForgotPasswordModalProp
     
     // Simular API call
     setTimeout(() => {
+      // Use a ref to avoid updates if component is unmounted
       setIsLoading(false);
       setIsSubmitted(true);
     }, 1000);

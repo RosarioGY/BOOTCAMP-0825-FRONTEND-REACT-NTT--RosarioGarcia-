@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,18 +108,16 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">31x</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -153,16 +151,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Link } from 'react-router-dom';</span>
-<span class="cstat-no" title="statement not covered" >import { useAuth } from '@/modules/auth/hooks/useAuth';</span>
-<span class="cstat-no" title="statement not covered" >import { useCart } from '@/modules/cart/hooks/useCart';</span>
-<span class="cstat-no" title="statement not covered" >import { ROUTES } from '@/shared/constants/routes';</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Link } from 'react-router-dom';
+import { useAuth } from '@/modules/auth/hooks/useAuth';
+import { useCart } from '@/modules/cart/hooks/useCart';
+import { ROUTES } from '@/shared/constants/routes';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >export default function <span class="fstat-no" title="function not covered" >H</span>eader(</span>) {
-  const { user, logout } = <span class="cstat-no" title="statement not covered" >useAuth();</span>
-  const { totalUnique } = <span class="cstat-no" title="statement not covered" >useCart();</span>
+export default function Header() {
+  const { user, logout } = useAuth();
+  const { totalUnique } = useCart();
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return (</span>
+  return (
     &lt;header style={{
       display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       padding: '10px 16px', borderBottom: '1px solid #e2e8f0', position: 'sticky', top: 0, background: '#fff', zIndex: 50
@@ -176,7 +176,7 @@
           &lt;Link to={ROUTES.summary} style={{ position: 'relative', textDecoration: 'none' }}&gt;
             🛒
             {totalUnique &gt; 0 &amp;&amp; (
-              &lt;span style={{
+<span class="branch-1 cbranch-no" title="branch not covered" >              &lt;span style={{</span>
                 position: 'absolute', top: -8, right: -10, fontSize: 12,
                 background: '#ef4444', color: '#fff', borderRadius: 999, padding: '2px 6px'
               }}&gt;
@@ -187,7 +187,7 @@
 &nbsp;
           {user &amp;&amp; (
             &lt;div style={{ display: 'flex', gap: 8, alignItems: 'center' }}&gt;
-              &lt;span&gt;Hola, {user.firstName ?? user.username}&lt;/span&gt;
+              &lt;span&gt;Hola, {user.firstName<span class="branch-0 cbranch-no" title="branch not covered" > ?? u</span>ser.username}&lt;/span&gt;
               &lt;button onClick={logout} style={{ border: '1px solid #64748b', borderRadius: 8, padding: '4px 8px' }}&gt;
                 Salir
               &lt;/button&gt;
@@ -205,7 +205,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-09-19T21:44:12.274Z
+                at 2025-09-19T22:57:16.694Z
             </div>
         <script src="../../../../prettify.js"></script>
         <script>
