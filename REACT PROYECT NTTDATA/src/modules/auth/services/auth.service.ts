@@ -18,7 +18,7 @@ export async function loginService(credentials: AuthCredentials): Promise<User> 
 }
 
 export async function getProfileService(accessToken: string): Promise<User> {
-  const profile = await getUserProfile(accessToken);
+  const profile = await getUserProfile();
   return mapUserProfileResponse(profile, accessToken);
 }
 

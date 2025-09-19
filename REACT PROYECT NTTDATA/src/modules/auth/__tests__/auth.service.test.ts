@@ -154,7 +154,7 @@ describe('Auth Service', () => {
 
       const result = await getProfileService(mockAccessToken);
 
-      expect(mockGetUserProfile).toHaveBeenCalledWith(mockAccessToken);
+      expect(mockGetUserProfile).toHaveBeenCalledWith();
       expect(mockMapUserProfileResponse).toHaveBeenCalledWith(mockProfileResponse, mockAccessToken);
       expect(result).toBe(mockMappedUser);
     });
